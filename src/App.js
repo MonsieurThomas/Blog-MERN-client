@@ -5,7 +5,7 @@ import BlogDetail from "./components/BlogDetail";
 import AddBlog from "./components/AddBlog";
 
 import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Auth from "./components/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./store";
@@ -27,7 +27,10 @@ function App() {
       <main>
         <Routes>
           {!isLoggedIn ? (
-            <Route path="/auth" element={<Auth />} />
+            <>
+              <Route path="*" element={<Navigate to="/auth" />} />
+              <Route path="/auth" element={<Auth />} />
+            </>
           ) : (
             <>
               <Route path="/blogs" element={<Blogs />} />
